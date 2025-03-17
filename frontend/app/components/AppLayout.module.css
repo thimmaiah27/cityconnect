@@ -1,0 +1,573 @@
+.container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .hamburgerMenu {
+    position: fixed;
+    top: 16px;
+    left: 28px;
+    z-index: 1002;
+    cursor: pointer;
+    width: 24px;
+    height: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: opacity 0.2s;
+  }
+  
+  .hamburgerMenu:hover {
+    opacity: 0.8;
+  }
+  
+  .hamburgerMenu span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: all 0.3s;
+  }
+  
+  .sidebar {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    background: var(--card-background);
+    width: 260px;
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1001;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .sidebar.collapsed {
+    width: 80px;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--divider-color);
+    margin-top: 40px;
+  }
+  
+  .profile h3 {
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin: 0;
+  }
+  
+  .profile span {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+  }
+  
+  .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: 1rem;
+  }
+  
+  .nav button {
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    background: none;
+    border: none;
+    border-radius: 0.5rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  
+  .nav button i {
+    font-size: 1.2rem;
+    min-width: 24px;
+    text-align: center;
+  }
+  
+  .sidebar.collapsed .nav button {
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  
+  .sidebar.collapsed .nav button i {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  .sidebar.collapsed .nav button span {
+    display: none;
+  }
+  .sidebar.collapsed .profile {
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+  
+  .sidebar.collapsed .name{
+    display: none;
+  }
+  
+  .nav button:hover, .nav button.active {
+    background: var(--primary-color);
+    color: var(--card-background);
+  }
+  
+  .nav button:hover i, .nav button.active i {
+    color: var(--card-background);
+  }
+  
+  .mainContent {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+    width: calc(100% - 260px);
+    margin-left: 260px;
+    height: 100vh;
+  }
+  
+  .mainContent.sidebarCollapsed {
+    width: calc(100% - 60px);
+    margin-left: 60px;
+  }
+  
+  .mainNav {
+    background: var(--card-background);
+    padding: 16px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .mainNav h1 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+  }
+  
+  .content {
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+  
+  .logoutBtn {
+    padding: 0.5rem 1rem;
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .logoutBtn:hover {
+    background: var(--primary-color);
+    color: var(--card-background);
+  }
+  
+  .recentApplications {
+    background: var(--card-background);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .recentApplications h2 {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+  }
+  
+  .table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .tableHeader, .tableRow {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+    padding: 1rem;
+    align-items: center;
+  }
+  
+  .tableHeader {
+    color: var(--text-secondary);
+    font-weight: 500;
+    border-bottom: 1px solid var(--divider-color);
+  }
+  
+  .tableRow {
+    background: var(--secondary-color);
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+  }
+  
+  .tableRow:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow);
+  }
+  
+  .status {
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+  
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  .overlay.active {
+    display: none;
+  }
+  
+  .sidebarFooter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 260px;
+    padding: 0.75rem;
+    background: var(--card-background);
+    border-top: 1px solid var(--divider-color);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .sidebar.collapsed .sidebarFooter {
+    width: 80px;
+  }
+  
+  .sidebarLogout {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    background: none;
+    border: none;
+    border-radius: 0.5rem;
+    color: var(--error-color);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .sidebarLogout:hover {
+    background: var(--error-color);
+    color: var(--card-background);
+  }
+  
+  .sidebarLogout img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .sidebar.collapsed .sidebarLogout {
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  
+  .sidebar.collapsed .sidebarLogout span {
+    display: none;
+  }
+  
+  .sidebarIcon {
+    filter: var(--svg-filter);
+  }
+  
+  .sidebarLogout:hover .sidebarIcon {
+    filter: brightness(0) invert(1);
+  }
+  
+  .nav button img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .nav button:hover img,
+  .nav button.active img {
+    filter: brightness(0) invert(1);
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      transform: translateX(-100%);
+      width: 260px;
+    }
+  
+    .sidebar.collapsed {
+      width: 260px;
+    }
+  
+    .sidebar.active {
+      transform: translateX(0);
+    }
+  
+    .mainContent {
+      width: 100% !important;
+      margin-left: 0 !important;
+    }
+  
+    .mainContent.sidebarActive {
+      filter: blur(3px);
+    }
+  
+    .overlay.active {
+      display: block;
+    }
+  
+    .tableHeader, .tableRow {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  
+    .tableHeader span:nth-child(3),
+    .tableHeader span:nth-child(4),
+    .tableRow span:nth-child(3),
+    .tableRow span:nth-child(4) {
+      display: none;
+    }
+  
+    .sidebarFooter {
+      width: 260px;
+    }
+  
+    .sidebar.collapsed .sidebarFooter {
+      width: 260px;
+    }
+  
+    .sidebar.collapsed .sidebarLogout {
+      justify-content: flex-start;
+      padding: 0.75rem 1rem;
+    }
+  
+    .sidebar.collapsed .sidebarLogout span {
+      display: block;
+    }
+  
+    .sidebar.collapsed .nav button {
+      justify-content: flex-start;
+      padding: 0.5rem 0.75rem;
+    }
+  
+    .sidebar.collapsed .nav button span {
+      display: block;
+    }
+  
+    .sidebar.collapsed .name {
+      display: block;
+    }
+  
+    .sidebar.collapsed .searchContainer {
+      padding: 0.5rem 0.75rem;
+      justify-content: flex-start;
+    }
+  
+    .sidebar.collapsed .searchInput {
+      display: block;
+    }
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .sidebar.collapsed {
+      width: 260px;
+    }
+  
+    .sidebar.collapsed .nav button {
+      justify-content: flex-start;
+      padding: 0.5rem 0.75rem;
+    }
+  
+    .sidebar.collapsed .nav button span {
+      display: block;
+    }
+  
+    .sidebar.collapsed .name {
+      display: block;
+    }
+  
+    .sidebar.collapsed .searchContainer {
+      padding: 0.5rem 0.75rem;
+      justify-content: flex-start;
+    }
+  
+    .sidebar.collapsed .searchInput {
+      display: block;
+    }
+  
+    .sidebar.collapsed .sidebarLogout {
+      justify-content: flex-start;
+      padding: 0.5rem 0.75rem;
+    }
+  
+    .sidebar.collapsed .sidebarLogout span {
+      display: block;
+    }
+  }
+  
+  .searchContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--secondary-color);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.25rem;
+    transition: all 0.2s;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .searchContainer:hover {
+    background: var(--hover-background);
+  }
+  
+  .searchPlaceholder {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+  
+  .sidebar.collapsed .searchPlaceholder {
+    display: none;
+  }
+  
+  .searchInput {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  
+  .searchInput::placeholder {
+    color: var(--text-secondary);
+  }
+  
+  .searchContainer:focus-within .searchInput {
+    color: var(--card-background);
+  }
+  
+  .searchContainer:focus-within .searchInput::placeholder {
+    color: var(--card-background);
+    opacity: 0.7;
+  }
+  
+  .sidebar.collapsed .searchContainer {
+    padding: 0.75rem;
+    justify-content: center;
+  }
+  
+  .sidebar.collapsed .searchInput {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar.collapsed .searchContainer {
+      padding: 0.75rem 1rem;
+      justify-content: flex-start;
+    }
+  
+    .sidebar.collapsed .searchInput {
+      display: block;
+    }
+  }
+  
+  .sidebarProfile {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    background: none;
+    border: none;
+    border-radius: 0.5rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .sidebarProfile:hover {
+    background: var(--hover-background);
+  }
+  
+  .sidebar.collapsed .sidebarProfile {
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  
+  .sidebar.collapsed .sidebarProfile span {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar.collapsed .sidebarProfile {
+      justify-content: flex-start;
+      padding: 0.75rem 1rem;
+    }
+  
+    .sidebar.collapsed .sidebarProfile span {
+      display: block;
+    }
+  }
+  
+  /* Add tooltip styles */
+  .hamburgerMenu::after {
+    content: attr(title);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100%;
+    margin-top: 8px;
+    padding: 4px 8px;
+    background: var(--card-background);
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    box-shadow: var(--card-shadow);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  
+  .hamburgerMenu:hover::after {
+    opacity: 1;
+  }
+  
+  /* Add these styles for menu icons */
+  .menuIcon {
+    filter: var(--svg-filter); /* This will make icons white in dark mode */
+    transition: filter 0.2s ease;
+  }
+  
+  .navButton:hover .menuIcon,
+  .navButton.active .menuIcon {
+    filter: brightness(0) invert(1); /* Always white on hover/active state */
+  }
+  
