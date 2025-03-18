@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from './context/ThemeContext';
+import { Providers } from './providers';
 import Header from './components/Header';
 
 
@@ -21,18 +22,20 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
         <link 
           rel="stylesheet" 
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" 
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ThemeProvider>
-          <Header />
-          {children}
-        </ThemeProvider>
+      <body>
+        <Providers>
+          <ThemeProvider>
+            <Header />
+            {children}
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
